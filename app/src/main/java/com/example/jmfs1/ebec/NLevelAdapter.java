@@ -48,7 +48,7 @@ public class NLevelAdapter extends BaseAdapter {
         return new NLevelFilter();
     }
 
-    class NLevelFilter {
+    public class NLevelFilter {
 
         public void filter() {
             new AsyncFilter().execute();

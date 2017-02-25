@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.jmfs1.ebec.NLevelAdapter;
 import com.example.jmfs1.ebec.NLevelItem;
 import com.example.jmfs1.ebec.NLevelView;
 import com.example.jmfs1.ebec.R;
@@ -88,6 +90,19 @@ public class ScoresFragment extends Fragment {
                 }
             }
         }
+
+        NLevelAdapter adapter = new NLevelAdapter(list);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                ((NLevelAdapter)listView.getAdapter()).toggle(arg2);
+                ((NLevelAdapter)listView.getAdapter()).getFilter().filter();
+
+            }
+        });
 
         return view;
     }
