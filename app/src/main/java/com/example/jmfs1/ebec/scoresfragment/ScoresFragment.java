@@ -11,15 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.jmfs1.ebec.NLevelAdapter;
-import com.example.jmfs1.ebec.NLevelItem;
-import com.example.jmfs1.ebec.NLevelView;
 import com.example.jmfs1.ebec.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.id.list;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,10 +39,12 @@ public class ScoresFragment extends Fragment {
 
         Log.d("score fragment", "lol");
 
-        View view = inflater.inflate(R.layout.fragment_scores, null);
+        View view = inflater.inflate(R.layout.fragment_scores, container, false);
         list = new ArrayList<>();
         listView = (ListView) view.findViewById(R.id.listView1);
         final LayoutInflater inflater_groups = LayoutInflater.from(getActivity());
+
+        populateLists();
 
         for (String team : teams) {
             final NLevelItem grandParent = new NLevelItem(team, null, new NLevelView() {
