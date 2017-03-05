@@ -9,7 +9,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.example.jmfs1.ebec.Fotos.Fotografias;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -19,25 +22,29 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        View include = findViewById(R.id.include);
+//        View appBarLayout = include.findViewById(R.id.appBarLayout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        ImageView iv = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
+        Glide.with(this).load(R.drawable.ebec).asBitmap().into(iv);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -51,22 +58,26 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_clock) {
-            // Handle the camera action
+        FragmentManager fm = getSupportFragmentManager();
 
-        } else if (id == R.id.nav_loja) {
-
-        } else if (id == R.id.nav_pontuacoes) {
-            FragmentManager fm = getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.frame, new ScoresFragment()).addToBackStack(null).commit();
-        } else if (id == R.id.nav_fotos) {
-
-        } else if (id == R.id.nav_parceiros) {
-
+        switch(id)
+        {
+            case R.id.nav_clock:
+                break;
+            case R.id.nav_loja:
+                break;
+            case R.id.nav_pontuacoes:
+                fm.beginTransaction().replace(R.id.frame, new ScoresFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_fotos:
+                fm.beginTransaction().replace(R.id.frame, new Fotografias()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_parceiros:
+                break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+    drawer.closeDrawer(GravityCompat.START);
+    return true;
+}
 }

@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#EEA225">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="fill_parent"
+        android:id="@+id/teamname"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30.0dip"
+        android:layout_marginLeft="30.0dip"
+        android:layout_marginRight="130.0dip"
+        android:layout_marginTop="30.0dip"
+        android:text=""
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/teamcredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="30.0dip"
+        android:text=""
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
+
+</RelativeLayout>

@@ -51,9 +51,12 @@ public class ScoresFragment extends Fragment {
                 @Override
                 public View getView(NLevelItem item) {
                     View view = inflater_groups.inflate(R.layout.list_item, null);
-                    TextView tv = (TextView) view.findViewById(R.id.textView);
+                    TextView tv = (TextView) view.findViewById(R.id.teamname);
+                    TextView tv2 = (TextView) view.findViewById(R.id.teamcredits);
                     String name = (String) item.getWrappedObject();
+                    String credits = "10c";
                     tv.setText(name);
+                    tv2.setText(credits);
                     return view;
                 }
             });
@@ -63,8 +66,8 @@ public class ScoresFragment extends Fragment {
                     @Override
                     public View getView(NLevelItem item) {
                         View view = inflater_groups.inflate(R.layout.list_item, null);
-                        TextView tv = (TextView) view.findViewById(R.id.textView);
-                        String name = (String) item.getWrappedObject();
+                        TextView tv = (TextView) view.findViewById(R.id.teamname);
+                        String name = "     " + (String) item.getWrappedObject();
                         tv.setText(name);
                         return view;
                     }
@@ -76,8 +79,8 @@ public class ScoresFragment extends Fragment {
                         @Override
                         public View getView(NLevelItem item) {
                             View view = inflater_groups.inflate(R.layout.list_item, null);
-                            TextView tv = (TextView) view.findViewById(R.id.textView);
-                            String name = (String) item.getWrappedObject();
+                            TextView tv = (TextView) view.findViewById(R.id.teamname);
+                            String name = "             " + (String) item.getWrappedObject();
                             tv.setText(name);
                             return view;
                         }
