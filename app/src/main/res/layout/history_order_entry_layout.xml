@@ -9,7 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_margin="20dip"
+        android:layout_marginTop="5dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginBottom="5dip"
         android:text="Product name"
         android:textStyle="bold"/>
 
@@ -18,7 +20,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentRight="true"
-        android:layout_margin="20dp">
+        android:layout_marginTop="5dip"
+        android:layout_marginRight="20dip"
+        android:layout_marginBottom="5dip">
 
         <TextView
             android:id="@+id/history_order_entry_quantity"
