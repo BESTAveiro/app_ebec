@@ -1,38 +1,41 @@
 package com.example.jmfs1.ebec.shop;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.jmfs1.ebec.R;
-import com.example.jmfs1.ebec.core.Product;
+import com.example.jmfs1.ebec.core.Order;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class ShopFragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
     private DatabaseReference mDatabase;
-    private ListView mProductsListView;
+    private ExpandableListView mOrdersListView;
 
-    private List<Product> mProducts;
+    private List<Order> mOrders;
     private List<String> mKeys;
 
-    private ShopAdapter mProductsAdapter;
+    private HistoryAdapter mOrdersAdapter;
 
-    public ShopFragment() {
+    public HistoryFragment() {
         // Required empty public constructor
     }
 
@@ -42,8 +45,8 @@ public class ShopFragment extends Fragment {
      *
      * @return A new instance of fragment ScheduleFragment.
      */
-    public static ShopFragment newInstance() {
-        ShopFragment fragment = new ShopFragment();
+    public static HistoryFragment newInstance() {
+        HistoryFragment fragment = new HistoryFragment();
         return fragment;
     }
 
@@ -57,54 +60,55 @@ public class ShopFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_shop_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_history_layout, container, false);
 
         // Connect to database
-        mDatabase = FirebaseDatabase.getInstance().getReference("products");
+        mDatabase = FirebaseDatabase.getInstance().getReference("history/" + "td1");
 
         // Get list view and adapter
-        mProducts = new ArrayList();
+        mOrders = new ArrayList();
         mKeys = new ArrayList();
-        mProductsListView = (ListView) view.findViewById(R.id.shop_fragment_list_view);
-        mProductsAdapter = new ShopAdapter(getContext(), mProducts);
-        mProductsListView.setAdapter(mProductsAdapter);
+        mOrdersListView = (ExpandableListView) view.findViewById(R.id.history_fragment_list_view);
+        mOrdersAdapter = new HistoryAdapter(getContext(), mOrders);
+        mOrdersListView.setAdapter(mOrdersAdapter);
 
+        // Set data
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Product product = dataSnapshot.getValue(Product.class);
-                mProducts.add(product);
+                Order order = dataSnapshot.getValue(Order.class);
+                mOrders.add(order);
 
                 String key = dataSnapshot.getKey();
                 mKeys.add(key);
 
-                mProductsAdapter.notifyDataSetChanged();
+                mOrdersAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                Product product = dataSnapshot.getValue(Product.class);
+                Order order = dataSnapshot.getValue(Order.class);
                 String key = dataSnapshot.getKey();
 
                 int index = mKeys.indexOf(key);
 
-                mProducts.set(index, product);
+                mOrders.set(index, order);
 
-                mProductsAdapter.notifyDataSetChanged();
+                mOrdersAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                Product product = dataSnapshot.getValue(Product.class);
+                Order order = dataSnapshot.getValue(Order.class);
                 String key = dataSnapshot.getKey();
 
                 int index = mKeys.indexOf(key);
 
-                mProducts.remove(index);
+                mOrders.remove(index);
 
-                mProductsAdapter.notifyDataSetChanged();
+                mOrdersAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -119,20 +123,5 @@ public class ShopFragment extends Fragment {
         });
 
         return view;
-    }
-
-    public void onViewCreated(View paramView, Bundle paramBundle) {
-        super.onViewCreated(paramView, paramBundle);
-
-        FloatingActionButton mHistoryButton = (FloatingActionButton) paramView.findViewById(R.id.shop_fragment_history_button);
-
-        mHistoryButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View paramAnonymousView) {
-
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.frame, new HistoryFragment()).addToBackStack(null).commit();
-
-            }
-        });
     }
 }

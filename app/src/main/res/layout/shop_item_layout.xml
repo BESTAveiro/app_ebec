@@ -43,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2.0dip"
                 android:layout_marginLeft="10.0dip"
-                android:layout_marginTop="2.0dip"
                 android:text="Price: 20 credits" />
 
             <TextView
@@ -52,7 +51,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10.0dip"
                 android:layout_marginLeft="10.0dip"
-                android:layout_marginTop="2.0dip"
                 android:text="Quantity: 50 units" />
             </LinearLayout>
     </LinearLayout>

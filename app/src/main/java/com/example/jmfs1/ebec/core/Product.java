@@ -1,4 +1,4 @@
-package com.example.jmfs1.ebec.shop;
+package com.example.jmfs1.ebec.core;
 
 /**
  * Created by jeronimo on 22/02/2017.
