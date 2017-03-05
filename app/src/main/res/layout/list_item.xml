@@ -15,7 +15,7 @@
         android:layout_marginLeft="30.0dip"
         android:layout_marginRight="130.0dip"
         android:layout_marginTop="30.0dip"
-        android:text=""
+        android:text="Team Name"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#FFFFFF"
         android:textStyle="bold"/>
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_margin="30.0dip"
-        android:text=""
+        android:text="Team Credits"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#FFFFFF"
         android:textStyle="bold"/>
