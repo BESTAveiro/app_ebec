@@ -12,9 +12,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-//import com.example.jmfs1.ebec.Fotos.Fotografias;
+import com.example.jmfs1.ebec.Fotos.Fotografias;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
 import com.example.jmfs1.ebec.shop.ShopFragment;
+
+//import com.example.jmfs1.ebec.Fotos.Fotografias;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity
                 fm.beginTransaction().replace(R.id.frame, new ScoresFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_fotos:
-                //fm.beginTransaction().replace(R.id.frame, new Fotografias()).addToBackStack(null).commit();
+                fm.beginTransaction().replace(R.id.frame, new Fotografias()).addToBackStack(null).commit();
                 break;
             case R.id.nav_parceiros:
                 break;
