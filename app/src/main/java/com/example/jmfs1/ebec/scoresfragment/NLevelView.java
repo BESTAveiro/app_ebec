@@ -1,4 +1,4 @@
-package com.example.jmfs1.ebec;
+package com.example.jmfs1.ebec.scoresfragment;
 
 /**
  * Created by miguel on 21-12-2016.

@@ -11,15 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.jmfs1.ebec.NLevelAdapter;
-import com.example.jmfs1.ebec.NLevelItem;
-import com.example.jmfs1.ebec.NLevelView;
 import com.example.jmfs1.ebec.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.id.list;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,19 +39,24 @@ public class ScoresFragment extends Fragment {
 
         Log.d("score fragment", "lol");
 
-        View view = inflater.inflate(R.layout.fragment_scores, null);
+        View view = inflater.inflate(R.layout.fragment_scores, container, false);
         list = new ArrayList<>();
         listView = (ListView) view.findViewById(R.id.listView1);
         final LayoutInflater inflater_groups = LayoutInflater.from(getActivity());
+
+        populateLists();
 
         for (String team : teams) {
             final NLevelItem grandParent = new NLevelItem(team, null, new NLevelView() {
                 @Override
                 public View getView(NLevelItem item) {
                     View view = inflater_groups.inflate(R.layout.list_item, null);
-                    TextView tv = (TextView) view.findViewById(R.id.textView);
+                    TextView tv = (TextView) view.findViewById(R.id.teamname);
+                    TextView tv2 = (TextView) view.findViewById(R.id.teamcredits);
                     String name = (String) item.getWrappedObject();
+                    String credits = "10c";
                     tv.setText(name);
+                    tv2.setText(credits);
                     return view;
                 }
             });
@@ -66,8 +66,8 @@ public class ScoresFragment extends Fragment {
                     @Override
                     public View getView(NLevelItem item) {
                         View view = inflater_groups.inflate(R.layout.list_item, null);
-                        TextView tv = (TextView) view.findViewById(R.id.textView);
-                        String name = (String) item.getWrappedObject();
+                        TextView tv = (TextView) view.findViewById(R.id.teamname);
+                        String name = "     " + (String) item.getWrappedObject();
                         tv.setText(name);
                         return view;
                     }
@@ -79,8 +79,8 @@ public class ScoresFragment extends Fragment {
                         @Override
                         public View getView(NLevelItem item) {
                             View view = inflater_groups.inflate(R.layout.list_item, null);
-                            TextView tv = (TextView) view.findViewById(R.id.textView);
-                            String name = (String) item.getWrappedObject();
+                            TextView tv = (TextView) view.findViewById(R.id.teamname);
+                            String name = "             " + (String) item.getWrappedObject();
                             tv.setText(name);
                             return view;
                         }

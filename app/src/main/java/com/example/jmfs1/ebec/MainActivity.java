@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.jmfs1.ebec.Fotos.Fotografias;
 import com.example.jmfs1.ebec.schedulefragment.ScheduleFragment;
+import com.bumptech.glide.Glide;
+import com.example.jmfs1.ebec.Fotos.Fotografias;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
 import com.example.jmfs1.ebec.shop.ShopCategoriesFragment;
 import com.example.jmfs1.ebec.shop.ShopFragment;
@@ -21,6 +23,10 @@ import com.example.jmfs1.ebec.shop.ShopFragment;
 //import com.example.jmfs1.ebec.Fotos.Fotografias;
 
 import java.util.concurrent.ScheduledExecutorService;
+import com.example.jmfs1.ebec.shop.ShopCategoriesFragment;
+import com.example.jmfs1.ebec.shop.ShopFragment;
+
+//import com.example.jmfs1.ebec.Fotos.Fotografias;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

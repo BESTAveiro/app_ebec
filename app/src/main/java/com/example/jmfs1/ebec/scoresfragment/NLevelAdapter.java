@@ -1,4 +1,4 @@
-package com.example.jmfs1.ebec;
+package com.example.jmfs1.ebec.scoresfragment;
 
 import android.os.AsyncTask;
 import android.view.View;
