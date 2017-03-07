@@ -2,6 +2,7 @@ package com.example.jmfs1.ebec.shop;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -63,7 +64,10 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history_layout, container, false);
 
         // Connect to database
-        mDatabase = FirebaseDatabase.getInstance().getReference("history/" + "td1");
+        SharedPreferences prefs = getContext().getSharedPreferences("LOGIN_PREFS", 0);
+        prefs.edit();
+        String team_id = prefs.getString("TEAM", "default");
+        mDatabase = FirebaseDatabase.getInstance().getReference("history/" + team_id);
 
         // Get list view and adapter
         mOrders = new ArrayList();

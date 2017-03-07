@@ -33,6 +33,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.jmfs1.ebec.core.TeamData;
+import com.example.jmfs1.ebec.messaging.MessagingUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -334,8 +335,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("teams_data/" + mTeam);
             teamData = null;
 
-            Log.d("EBEC-LOG", "Start");
-
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 
                 @Override
@@ -380,7 +379,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 prefs.putString("TEAM", mTeam);
                 prefs.commit();
 
-                // Subscrive
+                // Subscribe topic
+                MessagingUtils.subscribeTopic(mTeam);
 
                 Intent it = new Intent(LoginActivity.this.getApplicationContext(), MainActivity.class);
                 startActivity(it);

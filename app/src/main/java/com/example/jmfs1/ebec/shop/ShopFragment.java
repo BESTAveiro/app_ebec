@@ -7,9 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.jmfs1.ebec.R;
 import com.example.jmfs1.ebec.core.Product;
@@ -61,6 +59,7 @@ public class ShopFragment extends Fragment {
 
         // Connect to database
         mDatabase = FirebaseDatabase.getInstance().getReference("products");
+        final String category = (String) getArguments().get("category");
 
         // Get list view and adapter
         mProducts = new ArrayList();
@@ -73,6 +72,11 @@ public class ShopFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Product product = dataSnapshot.getValue(Product.class);
+
+                if (!category.equalsIgnoreCase("Todos") && !product.getCategory().equalsIgnoreCase(category)) {
+                    return;
+                }
+
                 mProducts.add(product);
 
                 String key = dataSnapshot.getKey();
@@ -83,8 +87,12 @@ public class ShopFragment extends Fragment {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
                 Product product = dataSnapshot.getValue(Product.class);
+
+                if (!category.equalsIgnoreCase("Todos") && !product.getCategory().equalsIgnoreCase(category)) {
+                    return;
+                }
+
                 String key = dataSnapshot.getKey();
 
                 int index = mKeys.indexOf(key);
@@ -96,8 +104,12 @@ public class ShopFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
                 Product product = dataSnapshot.getValue(Product.class);
+
+                if (!category.equalsIgnoreCase("Todos") && !product.getCategory().equalsIgnoreCase(category)) {
+                    return;
+                }
+
                 String key = dataSnapshot.getKey();
 
                 int index = mKeys.indexOf(key);

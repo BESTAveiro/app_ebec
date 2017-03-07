@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.jmfs1.ebec.Fotos.Fotografias;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
+import com.example.jmfs1.ebec.shop.ShopCategoriesFragment;
 import com.example.jmfs1.ebec.shop.ShopFragment;
 
 //import com.example.jmfs1.ebec.Fotos.Fotografias;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_clock:
                 break;
             case R.id.nav_loja:
-                fm.beginTransaction().replace(R.id.frame, new ShopFragment()).addToBackStack(null).commit();
+                fm.beginTransaction().replace(R.id.frame, new ShopCategoriesFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_pontuacoes:
                 fm.beginTransaction().replace(R.id.frame, new ScoresFragment()).addToBackStack(null).commit();
