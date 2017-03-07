@@ -8,5 +8,5 @@
         android:id="@+id/log_out"
         android:orderInCategory="100"
         android:title="Log Out"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 </menu>
