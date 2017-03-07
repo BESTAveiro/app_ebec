@@ -1,21 +1,24 @@
 package com.example.jmfs1.ebec;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.example.jmfs1.ebec.Fotos.Fotografias;
 import com.example.jmfs1.ebec.schedulefragment.ScheduleFragment;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
+import com.example.jmfs1.ebec.shop.ShopCategoriesFragment;
+import com.example.jmfs1.ebec.shop.ShopFragment;
+
+//import com.example.jmfs1.ebec.Fotos.Fotografias;
 
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -26,25 +29,29 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        View include = findViewById(R.id.include);
+//        View appBarLayout = include.findViewById(R.id.appBarLayout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        ImageView iv = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
+        Glide.with(this).load(R.drawable.ebec).asBitmap().into(iv);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -52,27 +59,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     @Override
@@ -80,23 +66,28 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        /*TODO: getSupportFragmentManager() at the beginning of this method.*/
-        if (id == R.id.nav_clock) {
-            FragmentManager fm = getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.frame, new ScheduleFragment()).addToBackStack(null).commit();
-        } else if (id == R.id.nav_loja) {
+        FragmentManager fm = getSupportFragmentManager();
 
-        } else if (id == R.id.nav_pontuacoes) {
-            FragmentManager fm = getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.frame, new ScoresFragment()).addToBackStack(null).commit();
-        } else if (id == R.id.nav_fotos) {
-
-        } else if (id == R.id.nav_parceiros) {
-
+        switch(id)
+        {
+            case R.id.nav_clock:
+                fm.beginTransaction().replace(R.id.frame, new ScheduleFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_loja:
+                fm.beginTransaction().replace(R.id.frame, new ShopCategoriesFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_pontuacoes:
+                fm.beginTransaction().replace(R.id.frame, new ScoresFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_fotos:
+                fm.beginTransaction().replace(R.id.frame, new Fotografias()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_parceiros:
+                break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+    drawer.closeDrawer(GravityCompat.START);
+    return true;
+}
 }
