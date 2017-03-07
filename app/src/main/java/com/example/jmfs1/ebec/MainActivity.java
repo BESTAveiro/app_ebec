@@ -14,7 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.jmfs1.ebec.schedulefragment.ScheduleFragment;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
+
+import java.util.concurrent.ScheduledExecutorService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,14 +74,16 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        /*TODO: getSupportFragmentManager() at the beginning of this method.*/
         if (id == R.id.nav_clock) {
-            // Handle the camera action
-
+            FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.frame, new ScheduleFragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_loja) {
 
         } else if (id == R.id.nav_pontuacoes) {
