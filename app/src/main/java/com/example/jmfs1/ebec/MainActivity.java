@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity
 
             // Staring Login Activity
             getApplicationContext().startActivity(i);
+            finish();
 
             return true;
         }
