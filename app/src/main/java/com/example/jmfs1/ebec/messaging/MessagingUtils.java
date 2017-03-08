@@ -3,11 +3,8 @@ package com.example.jmfs1.ebec.messaging;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 import com.pushraven.Notification;
 import com.pushraven.Pushraven;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by root on 3/5/17.
@@ -40,11 +37,12 @@ public class MessagingUtils {
                 Notification raven = new Notification();
                 raven.title(title)
                         .text(message)
-                        .to(topic);
+                        .color("#ff0000")
+                        .to("/topics/td1");
 
                 Log.d("Topic", topic);
 
-                Pushraven.push(raven);
+                Log.d("PushRaven response", Pushraven.push(raven).toString());
             }
         }).start();
     }
