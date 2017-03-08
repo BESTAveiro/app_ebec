@@ -10,12 +10,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.jmfs1.ebec.Fotos.Fotografias;
+import com.example.jmfs1.ebec.messaging.MessagingUtils;
 import com.example.jmfs1.ebec.schedulefragment.ScheduleFragment;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
 import com.example.jmfs1.ebec.shop.ShopCategoriesFragment;
@@ -88,6 +90,9 @@ public class MainActivity extends AppCompatActivity
             getApplicationContext().startActivity(i);
 
             return true;
+        } else if (id == R.id.duvidas_prova) {
+            Log.d("Duvidas", "Mandei");
+            MessagingUtils.sendMessage("Tile", "Message", "td1");
         }
 
         return super.onOptionsItemSelected(item);

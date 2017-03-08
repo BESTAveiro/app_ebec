@@ -21,7 +21,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,7 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.jmfs1.ebec.core.TeamData;
+import com.example.jmfs1.ebec.core.Team;
 import com.example.jmfs1.ebec.messaging.MessagingUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
-    private TeamData teamData;
+    private Team teamData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -339,7 +338,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    teamData = dataSnapshot.getValue(TeamData.class);
+                    teamData = dataSnapshot.getValue(Team.class);
                     semaphore.release();
                 }
 
