@@ -376,6 +376,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // Save data in users phone
                 SharedPreferences.Editor prefs = getApplicationContext().getSharedPreferences("LOGIN_PREFS", 0).edit();
                 prefs.putString("TEAM", mTeam);
+                prefs.putString("TEAMNAME", teamData.getName());
                 prefs.commit();
 
                 // Subscribe topic

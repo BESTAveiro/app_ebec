@@ -92,7 +92,13 @@ public class MainActivity extends AppCompatActivity
 
             return true;
         } else if (id == R.id.duvidas_prova) {
-            Log.d("Duvidas", "Mandei");
+            SharedPreferences sp = getSharedPreferences("LOGIN_PREFS", MODE_PRIVATE);
+            Log.d("Duvidas Prova", "Mandei");
+            MessagingUtils.sendMessage("Tile", "Message", "td1");
+        }
+        else if(id==R.id.outros)
+        {
+            Log.d("Duvidas Outros", "Mandei");
             MessagingUtils.sendMessage("Tile", "Message", "td1");
         }
 
