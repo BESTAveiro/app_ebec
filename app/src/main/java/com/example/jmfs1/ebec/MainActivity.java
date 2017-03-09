@@ -93,8 +93,10 @@ public class MainActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.duvidas_prova) {
             SharedPreferences sp = getSharedPreferences("LOGIN_PREFS", MODE_PRIVATE);
+            String teamName = sp.getString("TEAMNAME", "Some Error Ocurred");
             Log.d("Duvidas Prova", "Mandei");
             MessagingUtils.sendMessage("Tile", "Message", "td1");
+            MessagingUtils.sendMessageNotNotification(teamName, "td1");
         }
         else if(id==R.id.outros)
         {

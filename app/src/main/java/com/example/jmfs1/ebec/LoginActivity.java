@@ -21,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -376,6 +377,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // Save data in users phone
                 SharedPreferences.Editor prefs = getApplicationContext().getSharedPreferences("LOGIN_PREFS", 0).edit();
                 prefs.putString("TEAM", mTeam);
+                // TODO isto está a null
+                Log.d("team name", ""+teamData.getName());
                 prefs.putString("TEAMNAME", teamData.getName());
                 prefs.commit();
 
