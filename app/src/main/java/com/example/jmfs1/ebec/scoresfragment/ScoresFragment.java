@@ -3,7 +3,6 @@ package com.example.jmfs1.ebec.scoresfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.jmfs1.ebec.R;
-import com.example.jmfs1.ebec.core.Product;
+import com.example.jmfs1.ebec.core.MiniCompetition;
 import com.example.jmfs1.ebec.core.Team;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,48 +27,70 @@ import java.util.List;
  */
 public class ScoresFragment extends Fragment {
 
+    private DatabaseReference mDatabase;
+
     List<NLevelItem> list;
     ListView listView;
 
-    private List<String> teams = new ArrayList<>();
-    private List<String> memAndProvas = new ArrayList<>();
-    private List<String> testing = new ArrayList<>();
+    private List<Team> mTeams;
+    private List<String> mMembers;
+    private List<MiniCompetition> mMiniProvas;
+    private List<String> mKeys;
+
+    private List<String> staticTeams;
+    private List<String> staticScores;
 
     public ScoresFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.d("score fragment", "lol");
+        // get database reference
+        mDatabase = FirebaseDatabase.getInstance().getReference("teams");
+
+        final List<String> staticList = new ArrayList<>();
+        staticList.add("Membros");
+        staticList.add("Mini Provas");
+
+        mTeams = new ArrayList();
+        mKeys = new ArrayList();
+        list = new ArrayList<>();
+        staticScores = new ArrayList<>();
 
         View view = inflater.inflate(R.layout.fragment_scores, container, false);
-        list = new ArrayList<>();
         listView = (ListView) view.findViewById(R.id.listView1);
+
         final LayoutInflater inflater_groups = LayoutInflater.from(getActivity());
 
-        populateLists();
+        mDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Team team = dataSnapshot.getValue(Team.class);
+                mTeams.add(team);
 
-        for (String team : teams) {
-            final NLevelItem grandParent = new NLevelItem(team, null, new NLevelView() {
-                @Override
-                public View getView(NLevelItem item) {
-                    View view = inflater_groups.inflate(R.layout.list_item, null);
-                    TextView tv = (TextView) view.findViewById(R.id.teamname);
-                    TextView tv2 = (TextView) view.findViewById(R.id.teamcredits);
-                    String name = (String) item.getWrappedObject();
-                    String credits = "10c";
-                    tv.setText(name);
-                    tv2.setText(credits);
-                    return view;
-                }
-            });
-            list.add(grandParent);
-            for (String memPro : memAndProvas) {
-                NLevelItem parent = new NLevelItem(memPro, grandParent, new NLevelView() {
+                String key = dataSnapshot.getKey();
+                mKeys.add(key);
+
+                final NLevelItem grandParent = new NLevelItem(team, null, new NLevelView() {
+                    @Override
+                    public View getView(NLevelItem item) {
+                        View view = inflater_groups.inflate(R.layout.list_item, null);
+                        TextView tname = (TextView) view.findViewById(R.id.teamname);
+                        TextView tcredits = (TextView) view.findViewById(R.id.teamcredits);
+                        Team t = (Team) item.getWrappedObject();
+                        String mTeamName = t.getName();
+                        String mTeamCredits = Integer.toString(t.getCredits());
+                        tname.setText(mTeamName);
+                        tcredits.setText(mTeamCredits);
+                        return view;
+                    }
+                });
+                list.add(grandParent);
+
+                NLevelItem parentMem = new NLevelItem(staticList.get(0), grandParent, new NLevelView() {
                     @Override
                     public View getView(NLevelItem item) {
                         View view = inflater_groups.inflate(R.layout.list_item, null);
@@ -79,10 +100,10 @@ public class ScoresFragment extends Fragment {
                         return view;
                     }
                 });
+                list.add(parentMem);
 
-                list.add(parent);
-                for (String item : testing) {
-                    NLevelItem child = new NLevelItem(item, parent, new NLevelView() {
+                for (String teamMember : team.getParticipants()) {
+                    NLevelItem childMem = new NLevelItem(teamMember, parentMem, new NLevelView() {
                         @Override
                         public View getView(NLevelItem item) {
                             View view = inflater_groups.inflate(R.layout.list_item, null);
@@ -93,36 +114,164 @@ public class ScoresFragment extends Fragment {
                         }
                     });
 
-                    list.add(child);
+                    list.add(childMem);
                 }
-            }
-        }
 
-        NLevelAdapter adapter = new NLevelAdapter(list);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                NLevelItem parentCpt = new NLevelItem(staticList.get(1), grandParent, new NLevelView() {
+                    @Override
+                    public View getView(NLevelItem item) {
+                        View view = inflater_groups.inflate(R.layout.list_item, null);
+                        TextView tv = (TextView) view.findViewById(R.id.teamname);
+                        String name = "     " + (String) item.getWrappedObject();
+                        tv.setText(name);
+                        return view;
+                    }
+                });
+                list.add(parentCpt);
+
+                for (MiniCompetition minicpt : team.getMini_competitions()) {
+                    NLevelItem childCpt = new NLevelItem(minicpt, parentCpt, new NLevelView() {
+                        @Override
+                        public View getView(NLevelItem item) {
+                            View view = inflater_groups.inflate(R.layout.list_item, null);
+                            TextView tv = (TextView) view.findViewById(R.id.teamname);
+                            MiniCompetition mcpt = (MiniCompetition) item.getWrappedObject();
+                            String name = "             " + mcpt.getName() + ": " + mcpt.getCredits();
+                            tv.setText(name);
+                            return view;
+                        }
+                    });
+
+                    list.add(childCpt);
+                }
+
+                final NLevelAdapter adapter = new NLevelAdapter(list);
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                            long arg3) {
+                        ((NLevelAdapter) listView.getAdapter()).toggle(arg2);
+                        ((NLevelAdapter) listView.getAdapter()).getFilter().filter();
+
+                    }
+                });
+
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                /*Team team = dataSnapshot.getValue(Team.class);
+
+                String key = dataSnapshot.getKey();
+
+                int index = mKeys.indexOf(key);
+                mTeams.set(index, team);
+
+                final NLevelItem grandParent = new NLevelItem(team, null, new NLevelView() {
+                    @Override
+                    public View getView(NLevelItem item) {
+                        View view = inflater_groups.inflate(R.layout.list_item, null);
+                        TextView tname = (TextView) view.findViewById(R.id.teamname);
+                        TextView tcredits = (TextView) view.findViewById(R.id.teamcredits);
+                        Team t = (Team) item.getWrappedObject();
+                        String mTeamName = t.getName();
+                        String mTeamCredits = Integer.toString(t.getCredits());
+                        tname.setText(mTeamName);
+                        tcredits.setText(mTeamCredits);
+                        return view;
+                    }
+                });
+                list.add(grandParent);
+
+                NLevelItem parentMem = new NLevelItem(staticList.get(0), grandParent, new NLevelView() {
+                    @Override
+                    public View getView(NLevelItem item) {
+                        View view = inflater_groups.inflate(R.layout.list_item, null);
+                        TextView tv = (TextView) view.findViewById(R.id.teamname);
+                        String name = "     " + (String) item.getWrappedObject();
+                        tv.setText(name);
+                        return view;
+                    }
+                });
+                list.add(parentMem);
+
+                for (String teamMember : team.getParticipants()) {
+                    NLevelItem childMem = new NLevelItem(teamMember, parentMem, new NLevelView() {
+                        @Override
+                        public View getView(NLevelItem item) {
+                            View view = inflater_groups.inflate(R.layout.list_item, null);
+                            TextView tv = (TextView) view.findViewById(R.id.teamname);
+                            String name = "             " + (String) item.getWrappedObject();
+                            tv.setText(name);
+                            return view;
+                        }
+                    });
+
+                    list.add(childMem);
+                }
+
+                NLevelItem parentCpt = new NLevelItem(staticList.get(1), grandParent, new NLevelView() {
+                    @Override
+                    public View getView(NLevelItem item) {
+                        View view = inflater_groups.inflate(R.layout.list_item, null);
+                        TextView tv = (TextView) view.findViewById(R.id.teamname);
+                        String name = "     " + (String) item.getWrappedObject();
+                        tv.setText(name);
+                        return view;
+                    }
+                });
+                list.add(parentCpt);
+
+                for (MiniCompetition minicpt : team.getMini_competitions()) {
+                    NLevelItem childCpt = new NLevelItem(minicpt, parentCpt, new NLevelView() {
+                        @Override
+                        public View getView(NLevelItem item) {
+                            View view = inflater_groups.inflate(R.layout.list_item, null);
+                            TextView tv = (TextView) view.findViewById(R.id.teamname);
+                            MiniCompetition mcpt = (MiniCompetition) item.getWrappedObject();
+                            String name = "             " + mcpt.getName() + ": " + mcpt.getCredits();
+                            tv.setText(name);
+                            return view;
+                        }
+                    });
+
+                    list.add(childCpt);
+                }
+
+                final NLevelAdapter adapter = new NLevelAdapter(list);
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                            long arg3) {
+                        ((NLevelAdapter) listView.getAdapter()).toggle(arg2);
+                        ((NLevelAdapter) listView.getAdapter()).getFilter().filter();
+
+                    }
+                });
+
+                adapter.notifyDataSetChanged();*/
+            }
 
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                ((NLevelAdapter)listView.getAdapter()).toggle(arg2);
-                ((NLevelAdapter)listView.getAdapter()).getFilter().filter();
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
         return view;
-    }
-
-    private void populateLists(){
-        teams.add("Team A");
-        teams.add("Team B");
-        teams.add("Team C");
-
-        memAndProvas.add("Membros");
-        memAndProvas.add("Mini Provas");
-
-        testing.add("item1");
-        testing.add("item2");
     }
 }
