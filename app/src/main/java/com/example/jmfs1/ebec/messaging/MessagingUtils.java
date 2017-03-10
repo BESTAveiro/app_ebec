@@ -30,8 +30,8 @@ public class MessagingUtils {
             case "mo":
             case "board":
             case "mgmt":
-                FirebaseMessaging.getInstance().subscribeToTopic("core_team");
-                FirebaseMessaging.getInstance().subscribeToTopic("topic_group");
+                FirebaseMessaging.getInstance().subscribeToTopic("core-team");
+                FirebaseMessaging.getInstance().subscribeToTopic("topic-group");
                 break;
             default:
                 FirebaseMessaging.getInstance().subscribeToTopic(team);
@@ -41,21 +41,21 @@ public class MessagingUtils {
 
     public static void sendMessageNotNotification(String teamName, String topic)
     {
+        // Set headers
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization",
-                "key=AAAAAo9oPmQ:APA91bHlUO_JuMwr5uKNQQdx636QGUImEzGbYq6czpYMCCNTpNCUfDHixRXl-vDQdDs_KYtk39TGI8xVGVzHYMa2hTykqmg0SjBvDoGk37wpIQMXBQA464r9yiEHVsI_pt-IOtxlnTUJ");
+                "key=AAAAAo9oPmQ:APA91bHlUO_JuMwr5uKNQQdx636QGUImEzGbYq6czpYMCCNTpNCUfDHixRXl-vDQdDs_" +
+                        "KYtk39TGI8xVGVzHYMa2hTykqmg0SjBvDoGk37wpIQMXBQA464r9yiEHVsI_pt-IOtxlnTUJ");
         client.addHeader("Content-Type", "application/json");
 
         StringEntity entity;
-        try
-        {
+        try {
             HashMap<String, String> map = new HashMap<>();
             map.put("TEAMNAME", teamName);
             entity = new StringEntity(getPostData(map , topic));
             if (entity == null) throw new Exception();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             // deu erro. Retornar e mostrar um toast
             // TODO mostrar toast em caso de erro
             e.printStackTrace();
@@ -113,24 +113,19 @@ public class MessagingUtils {
 
     }
 
-    public static void sendMessage(final String sender, final String message, final String topic) {
+    public static void sendMessage(final String message, final String topic) {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Pushraven.setKey("AAAAAo9oPmQ:APA91bHlUO_JuMwr5uKNQQdx636QGUImEzGbYq6czpYMCCNTpNCUfDHixRXl-vDQdDs_KYtk39TGI8xVGVzHYMa2hTykqmg0SjBvDoGk37wpIQMXBQA464r9yiEHVsI_pt-IOtxlnTUJ");
-
-                HashMap<String, Object> data = new HashMap<String, Object>();
-                data.put("From", sender);
+                Pushraven.setKey("AAAAAo9oPmQ:APA91bHlUO_JuMwr5uKNQQdx636QGUImEzGbYq6czpYMCCNTpNCUf" +
+                        "DHixRXl-vDQdDs_KYtk39TGI8xVGVzHYMa2hTykqmg0SjBvDoGk37wpIQMXBQA464r9yiEHVsI" +
+                        "_pt-IOtxlnTUJ");
 
                 Notification raven = new Notification();
-                raven.title(sender)
-                        .text(message)
-                        .color("#ff0000")
-                        .data(data)
+                raven.title("EBEC Aveiro 2017")
+                        .body(message)
                         .to("/topics/"+topic);
-
-                Log.d("Topic", topic);
 
                 Log.d("PushRaven response", Pushraven.push(raven).toString());
             }

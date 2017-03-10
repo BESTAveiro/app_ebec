@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.jmfs1.ebec.Fotos.Fotografias;
+import com.example.jmfs1.ebec.alerts.AlertFragment;
 import com.example.jmfs1.ebec.messaging.MessagingUtils;
 import com.example.jmfs1.ebec.schedulefragment.ScheduleFragment;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
@@ -91,17 +92,28 @@ public class MainActivity extends AppCompatActivity
             finish();
 
             return true;
+
         } else if (id == R.id.duvidas_prova) {
+
+            // Get team name
             SharedPreferences sp = getSharedPreferences("LOGIN_PREFS", MODE_PRIVATE);
             String teamName = sp.getString("TEAMNAME", "Some Error Ocurred");
+
             Log.d("Duvidas Prova", "Mandei");
-            MessagingUtils.sendMessage("Tile", "Message", "td1");
-            MessagingUtils.sendMessageNotNotification(teamName, "td1");
+
+            MessagingUtils.sendMessage(teamName + " tem dúvidas na prova!", "topic-group");
+            //MessagingUtils.sendMessageNotNotification(teamName, "td1");
+
         }
         else if(id==R.id.outros)
         {
+            // Get team name
+            SharedPreferences sp = getSharedPreferences("LOGIN_PREFS", MODE_PRIVATE);
+            String teamName = sp.getString("TEAMNAME", "Some Error Ocurred");
+
             Log.d("Duvidas Outros", "Mandei");
-            MessagingUtils.sendMessage("Tile", "Message", "td1");
+
+            MessagingUtils.sendMessage(teamName + " precisa de algo!", "core-team");
         }
 
         return super.onOptionsItemSelected(item);
@@ -131,6 +143,9 @@ public class MainActivity extends AppCompatActivity
                 fm.beginTransaction().replace(R.id.frame, new Fotografias()).addToBackStack(null).commit();
                 break;
             case R.id.nav_parceiros:
+                break;
+            case R.id.nav_alertas:
+                fm.beginTransaction().replace(R.id.frame, new AlertFragment()).addToBackStack(null).commit();
                 break;
         }
 

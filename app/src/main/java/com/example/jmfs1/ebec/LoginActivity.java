@@ -332,7 +332,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             // Login
             final Semaphore semaphore = new Semaphore(0);
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("teams_data/" + mTeam);
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("teams/" + mTeam);
             teamData = null;
 
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -377,8 +377,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // Save data in users phone
                 SharedPreferences.Editor prefs = getApplicationContext().getSharedPreferences("LOGIN_PREFS", 0).edit();
                 prefs.putString("TEAM", mTeam);
-                // TODO isto está a null
-                Log.d("team name", ""+teamData.getName());
                 prefs.putString("TEAMNAME", teamData.getName());
                 prefs.commit();
 

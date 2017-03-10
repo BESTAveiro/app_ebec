@@ -22,12 +22,15 @@ public class Team {
 
     }
 
-    public Team(String id, String password, List<String> participants, String modality,
-                List<MiniCompetition> mini_competitions) {
+    public Team(String id, String password, String name, int credits, String code, String modality,
+                List<String> participants, List<MiniCompetition> mini_competitions) {
         this.id = id;
         this.password = password;
-        this.participants = participants;
+        this.name = name;
+        this.credits = credits;
+        this.code = code;
         this.modality = modality;
+        this.participants = participants;
         this.mini_competitions = mini_competitions;
     }
 
