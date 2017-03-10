@@ -69,6 +69,7 @@ public class ScoresFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Team team = dataSnapshot.getValue(Team.class);
+                
                 mTeams.add(team);
 
                 String key = dataSnapshot.getKey();

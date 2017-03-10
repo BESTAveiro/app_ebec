@@ -56,12 +56,12 @@ public class ShopCategoriesFragment extends Fragment {
         mTabHost.addTab(mTabHost.newTabSpec("Cartão").setIndicator("Cartão"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
-        bundle.putString("category", "Elétrónica");
-        mTabHost.addTab(mTabHost.newTabSpec("Elétrónica").setIndicator("Elétrónica"), ShopFragment.class, bundle);
+        bundle.putString("category", "Eletrónico");
+        mTabHost.addTab(mTabHost.newTabSpec("Eletrónico").setIndicator("Eletrónico"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
-        bundle.putString("category", "Madeira");
-        mTabHost.addTab(mTabHost.newTabSpec("Madeira").setIndicator("Madeira"), ShopFragment.class, bundle);
+        bundle.putString("category", "Madeiras");
+        mTabHost.addTab(mTabHost.newTabSpec("Madeiras").setIndicator("Madeiras"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
         bundle.putString("category", "Metal");
