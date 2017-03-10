@@ -11,24 +11,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_gravity="center"
-        android:layout_marginBottom="30.0dip"
-        android:layout_marginLeft="30.0dip"
-        android:layout_marginRight="130.0dip"
-        android:layout_marginTop="30.0dip"
-        android:text="Team Name"
+        android:layout_marginBottom="15.0dip"
+        android:layout_marginLeft="15.0dip"
+        android:layout_marginRight="15.0dip"
+        android:layout_marginTop="15.0dip"
+        android:text=""
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/teamcredits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_margin="30.0dip"
-        android:text="Team Credits"
+        android:layout_margin="15.0dip"
+        android:text=""
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:textColor="#FFFFFF"/>
 
 </RelativeLayout>
