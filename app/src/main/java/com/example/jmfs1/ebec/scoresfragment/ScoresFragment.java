@@ -52,6 +52,7 @@ public class ScoresFragment extends Fragment {
 
         // get database reference
         mDatabase = FirebaseDatabase.getInstance().getReference("teams");
+        final String modality = (String) getArguments().get("modality");
 
         final List<String> staticList = new ArrayList<>();
         staticList.add("Membros");
@@ -72,7 +73,6 @@ public class ScoresFragment extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.d("Scores", dataSnapshot.getChildrenCount()+"");
 
-
                 Iterator it = dataSnapshot.getChildren().iterator();
                 while(it.hasNext())
                 {
@@ -80,6 +80,10 @@ public class ScoresFragment extends Fragment {
                 }
 
                 Team team = dataSnapshot.getValue(Team.class);
+
+                if (!team.getModality().equalsIgnoreCase(modality)) {
+                    return;
+                }
 
                 mTeams.add(team);
 
@@ -96,7 +100,10 @@ public class ScoresFragment extends Fragment {
                         String mTeamName = t.getName();
                         String mTeamCredits = Integer.toString(t.getCredits());
                         tname.setText(mTeamName);
-                        tcredits.setText(mTeamCredits);
+                        if (t.getModality().equalsIgnoreCase("CS"))
+                            tcredits.setText("");
+                        else
+                            tcredits.setText(mTeamCredits);
                         return view;
                     }
                 });

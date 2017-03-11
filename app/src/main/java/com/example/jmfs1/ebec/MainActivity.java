@@ -21,6 +21,7 @@ import com.example.jmfs1.ebec.alerts.AlertFragment;
 import com.example.jmfs1.ebec.messaging.MessagingUtils;
 import com.example.jmfs1.ebec.schedulefragment.ScheduleFragment;
 import com.example.jmfs1.ebec.scoresfragment.ScoresFragment;
+import com.example.jmfs1.ebec.scoresfragment.ScoresModalityFragment;
 import com.example.jmfs1.ebec.shop.ShopCategoriesFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity
                 fm.beginTransaction().replace(R.id.frame, new ShopCategoriesFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_pontuacoes:
-                fm.beginTransaction().replace(R.id.frame, new ScoresFragment()).addToBackStack(null).commit();
+                fm.beginTransaction().replace(R.id.frame, new ScoresModalityFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_fotos:
                 fm.beginTransaction().replace(R.id.frame, new Fotografias()).addToBackStack(null).commit();
