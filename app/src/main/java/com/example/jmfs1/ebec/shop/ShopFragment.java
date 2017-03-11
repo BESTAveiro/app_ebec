@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class ShopFragment extends Fragment {
         // Connect to database
         mDatabase = FirebaseDatabase.getInstance().getReference("products");
         final String category = (String) getArguments().get("category");
+        Log.d("Category", category);
 
         // Get list view and adapter
         mProducts = new ArrayList();
@@ -72,6 +74,10 @@ public class ShopFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Product product = dataSnapshot.getValue(Product.class);
+
+                if (product == null || category == null|| product.getCategory()== null) {
+                    return;
+                }
 
                 if (!category.equalsIgnoreCase("Todos") && !product.getCategory().equalsIgnoreCase(category)) {
                     return;
