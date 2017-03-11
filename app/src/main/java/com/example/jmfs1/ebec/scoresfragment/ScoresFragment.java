@@ -100,10 +100,7 @@ public class ScoresFragment extends Fragment {
                         String mTeamName = t.getName();
                         String mTeamCredits = Integer.toString(t.getCredits());
                         tname.setText(mTeamName);
-                        if (t.getModality().equalsIgnoreCase("CS"))
-                            tcredits.setText("");
-                        else
-                            tcredits.setText(mTeamCredits);
+                        tcredits.setText(mTeamCredits);
                         return view;
                     }
                 });
