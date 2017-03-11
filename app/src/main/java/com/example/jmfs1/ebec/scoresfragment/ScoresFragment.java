@@ -3,6 +3,7 @@ package com.example.jmfs1.ebec.scoresfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -68,6 +70,15 @@ public class ScoresFragment extends Fragment {
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.d("Scores", dataSnapshot.getChildrenCount()+"");
+
+
+                Iterator it = dataSnapshot.getChildren().iterator();
+                while(it.hasNext())
+                {
+                    Log.d("scores", it.next().toString());
+                }
+
                 Team team = dataSnapshot.getValue(Team.class);
 
                 mTeams.add(team);

@@ -3,23 +3,21 @@ package com.example.jmfs1.ebec;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -380,6 +378,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 prefs.putString("TEAMNAME", teamData.getName());
                 prefs.commit();
 
+                Log.d("Subscribed", "to "+mTeam);
+                Log.d("Subscribed", "to "+teamData.getName());
                 // Subscribe topic
                 MessagingUtils.subscribeTopic(mTeam);
 

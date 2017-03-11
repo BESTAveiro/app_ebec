@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
 
             Log.d("Duvidas Prova", "Mandei");
 
-            MessagingUtils.sendMessage(teamName + " tem dúvidas na prova!", "topic-group");
+            MessagingUtils.sendMessage(teamName + " tem duvidas na prova!", "topic");
             //MessagingUtils.sendMessageNotNotification(teamName, "td1");
 
         }
@@ -109,11 +109,11 @@ public class MainActivity extends AppCompatActivity
         {
             // Get team name
             SharedPreferences sp = getSharedPreferences("LOGIN_PREFS", MODE_PRIVATE);
-            String teamName = sp.getString("TEAMNAME", "Some Error Ocurred");
+            String teamName = sp.getString("TEAM", "Some Error Ocurred");
 
             Log.d("Duvidas Outros", "Mandei");
 
-            MessagingUtils.sendMessage(teamName + " precisa de algo!", "core-team");
+            MessagingUtils.sendMessage(teamName + " precisa de algo!", "bdssquad");
         }
 
         return super.onOptionsItemSelected(item);
@@ -141,8 +141,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_fotos:
                 fm.beginTransaction().replace(R.id.frame, new Fotografias()).addToBackStack(null).commit();
-                break;
-            case R.id.nav_parceiros:
                 break;
             case R.id.nav_alertas:
                 fm.beginTransaction().replace(R.id.frame, new AlertFragment()).addToBackStack(null).commit();

@@ -24,10 +24,7 @@
             android:id="@+id/nav_fotos"
             android:icon="@drawable/icon_foto"
             android:title="Fotos" />
-        <item
-            android:id="@+id/nav_parceiros"
-            android:icon="@drawable/parceiros"
-            android:title="Parceiros" />
+
         <item
             android:id="@+id/nav_alertas"
             android:icon="@drawable/parceiros"

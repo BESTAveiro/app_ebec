@@ -49,7 +49,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Notification builder
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ebec)
+                .setSmallIcon(R.drawable.ebec)
                 .setContentTitle("EBEC Aveiro 2017")
                 .setContentText(message)
                 .setAutoCancel(true)
