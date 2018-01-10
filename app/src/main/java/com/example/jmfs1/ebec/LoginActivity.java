@@ -313,7 +313,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mPassword;
 
         UserLoginTask(String team, String password) {
-            mTeam = team;
+            mTeam = team + "@ebecaveiro.pt";
             mPassword = password;
         }
 
@@ -330,7 +330,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             // Login
             final Semaphore semaphore = new Semaphore(0);
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("teams/" + mTeam);
+            String team = mTeam.replace("@ebecaveiro.pt", "");
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("teams/" + team);
             teamData = null;
 
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -358,8 +359,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (teamData == null) {
                 return false;
-            } else if (!teamData.getPassword().equals(mPassword)) {
-                return false;
             }
 
             return true;
@@ -374,14 +373,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 // Save data in users phone
                 SharedPreferences.Editor prefs = getApplicationContext().getSharedPreferences("LOGIN_PREFS", 0).edit();
-                prefs.putString("TEAM", mTeam);
+                String team = mTeam.replace("@ebecaveiro.pt", "");
+                prefs.putString("TEAM", team);
                 prefs.putString("TEAMNAME", teamData.getName());
                 prefs.commit();
 
-                Log.d("Subscribed", "to "+mTeam);
+                Log.d("Subscribed", "to "+team);
                 Log.d("Subscribed", "to "+teamData.getName());
                 // Subscribe topic
-                MessagingUtils.subscribeTopic(mTeam);
+                MessagingUtils.subscribeTopic(team);
 
                 Intent it = new Intent(LoginActivity.this.getApplicationContext(), MainActivity.class);
                 startActivity(it);
