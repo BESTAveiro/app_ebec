@@ -1,5 +1,6 @@
 package com.example.jmfs1.ebec;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.jmfs1.ebec.Fotos.Fotografias;
@@ -95,7 +98,15 @@ public class MainActivity extends AppCompatActivity
             return true;
 
         } else if (id == R.id.duvidas_prova) {
+            /*DIEGO*/
+            Context context = getApplicationContext();
+            CharSequence text = "Alerta Enviado, espere um momento!";
+            int duration = Toast.LENGTH_SHORT;
 
+            Toast toast = Toast.makeText(context, text, duration);
+            //toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
+            toast.show();
+            /*FIM DIEGO*/
             // Get team name
             SharedPreferences sp = getSharedPreferences("LOGIN_PREFS", MODE_PRIVATE);
             String teamName = sp.getString("TEAMNAME", "Some Error Ocurred");
@@ -108,6 +119,13 @@ public class MainActivity extends AppCompatActivity
         }
         else if(id==R.id.outros)
         {
+            Context context = getApplicationContext();
+            CharSequence text = "Alerta Enviado, espere um momento!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            //toast.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
+            toast.show();
             // Get team name
             SharedPreferences sp = getSharedPreferences("LOGIN_PREFS", MODE_PRIVATE);
             String teamName = sp.getString("TEAM", "Some Error Ocurred");

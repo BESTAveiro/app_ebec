@@ -23,7 +23,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
-        android:background="#EEA225"
+        android:background="#294F66"
         app:itemTextColor="#ffffff"/>
 
 

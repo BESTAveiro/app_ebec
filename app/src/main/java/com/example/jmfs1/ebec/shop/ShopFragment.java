@@ -87,7 +87,6 @@ public class ShopFragment extends Fragment {
 
                 String key = dataSnapshot.getKey();
                 mKeys.add(key);
-
                 mProductsAdapter.notifyDataSetChanged();
             }
 

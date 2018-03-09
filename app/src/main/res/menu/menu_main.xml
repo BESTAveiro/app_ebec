@@ -12,7 +12,7 @@
     <item
         android:id="@+id/outros"
         android:orderInCategory="100"
-        android:title="Outros"
+        android:title="Outras Duvidas"
         app:showAsAction="never" />
     <item
         android:id="@+id/log_out"

@@ -1,6 +1,7 @@
 package com.example.jmfs1.ebec.scoresfragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -94,6 +95,7 @@ public class ScoresFragment extends Fragment {
                     @Override
                     public View getView(NLevelItem item) {
                         View view = inflater_groups.inflate(R.layout.list_item, null);
+                        view.setBackgroundColor(Color.parseColor("#294F66"));
                         TextView tname = (TextView) view.findViewById(R.id.teamname);
                         TextView tcredits = (TextView) view.findViewById(R.id.teamcredits);
                         Team t = (Team) item.getWrappedObject();
@@ -110,6 +112,7 @@ public class ScoresFragment extends Fragment {
                     @Override
                     public View getView(NLevelItem item) {
                         View view = inflater_groups.inflate(R.layout.list_item, null);
+                        view.setBackgroundColor(Color.parseColor("#326AA5"));
                         TextView tv = (TextView) view.findViewById(R.id.teamname);
                         String name = "     " + (String) item.getWrappedObject();
                         tv.setText(name);
@@ -123,9 +126,11 @@ public class ScoresFragment extends Fragment {
                         @Override
                         public View getView(NLevelItem item) {
                             View view = inflater_groups.inflate(R.layout.list_item, null);
+                            view.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             TextView tv = (TextView) view.findViewById(R.id.teamname);
                             String name = "             " + (String) item.getWrappedObject();
                             tv.setText(name);
+                            tv.setTextColor(Color.parseColor("#000000"));
                             return view;
                         }
                     });
@@ -137,6 +142,7 @@ public class ScoresFragment extends Fragment {
                     @Override
                     public View getView(NLevelItem item) {
                         View view = inflater_groups.inflate(R.layout.list_item, null);
+                        view.setBackgroundColor(Color.parseColor("#326AA5"));
                         TextView tv = (TextView) view.findViewById(R.id.teamname);
                         String name = "     " + (String) item.getWrappedObject();
                         tv.setText(name);
@@ -150,10 +156,12 @@ public class ScoresFragment extends Fragment {
                         @Override
                         public View getView(NLevelItem item) {
                             View view = inflater_groups.inflate(R.layout.list_item, null);
+                            view.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             TextView tv = (TextView) view.findViewById(R.id.teamname);
                             MiniCompetition mcpt = (MiniCompetition) item.getWrappedObject();
                             String name = "             " + mcpt.getName() + ": " + mcpt.getCredits();
                             tv.setText(name);
+                            tv.setTextColor(Color.parseColor("#000000"));
                             return view;
                         }
                     });
