@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="#EEA225">
+    android:background="#326AA5">
 
     <TextView
         android:id="@+id/listTitle"
