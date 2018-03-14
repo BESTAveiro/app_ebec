@@ -29,9 +29,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jmfs1.ebec.core.Team;
+import com.example.jmfs1.ebec.core.User;
 import com.example.jmfs1.ebec.messaging.MessagingUtils;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
@@ -65,7 +69,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    private List<User> users = new ArrayList();
+    private User mUser;
     private Team teamData;
+    private List<Team> teams = new ArrayList();
+
+    private boolean cancel = false;
+    private View focusView = null;
+    private String email;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,38 +181,97 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mTeamView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
-        String team = mTeamView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference usersRef = db.child("users");
 
-        boolean cancel = false;
-        View focusView = null;
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        // Check for a valid team.
-        if (TextUtils.isEmpty(team)) {
-            mTeamView.setError(getString(R.string.error_field_required));
-            focusView = mTeamView;
-            cancel = true;
-        }
+                // Get users
+                users.clear();
+                for (DataSnapshot userSnaphot : dataSnapshot.getChildren()) {
+                    User user = userSnaphot.getValue(User.class);
+                    user.setUsername(userSnaphot.getKey());
+                    users.add(user);
+                }
 
-        // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
+                // Store values at the time of the login attempt.
+                email = mTeamView.getText().toString();
+                password = mPasswordView.getText().toString();
 
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(team, password);
-            mAuthTask.execute((Void) null);
-        }
+                // Convert username to email if needed
+                mUser = null;
+                if (!email.contains("@")) {
+                    for (User user : users) {
+                        if (user.getUsername().equals(email)) {
+                            email = user.getEmail();
+                            mUser = user;
+                            break;
+                        }
+                    }
+                } else {
+                    for (User user : users) {
+                        if (user.getEmail().equals(email)) {
+                            mUser = user;
+                            break;
+                        }
+                    }
+                }
+
+                // Check for a valid team.
+                if (TextUtils.isEmpty(email)) {
+                    mTeamView.setError(getString(R.string.error_field_required));
+                    focusView = mTeamView;
+                    cancel = true;
+                }
+
+                // Check for a valid password, if the user entered one.
+                if (TextUtils.isEmpty(password)) {
+                    mPasswordView.setError(getString(R.string.error_invalid_password));
+                    focusView = mPasswordView;
+                    cancel = true;
+                }
+
+                // Get teams data
+                DatabaseReference db2 = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference teamsRef = db2.child("teams");
+
+                ValueEventListener eventListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        // Get teams
+                        teams.clear();
+                        for (DataSnapshot teamSnaphot : dataSnapshot.getChildren()) {
+                            Team team = teamSnaphot.getValue(Team.class);
+                            teams.add(team);
+                        }
+
+                        if (cancel) {
+                            // There was an error; don't attempt login and focus the first
+                            // form field with an error.
+                            focusView.requestFocus();
+                        } else {
+                            // Show a progress spinner, and kick off a background task to
+                            // perform the user login attempt.
+                            showProgress(true);
+                            mAuthTask = new UserLoginTask(email, password);
+                            mAuthTask.execute((Void) null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                };
+                teamsRef.addValueEventListener(eventListener);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        usersRef.addValueEventListener(eventListener);
     }
 
     private boolean isEmailValid(String email) {
@@ -309,11 +380,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mTeam;
+        private final String mEmail;
         private final String mPassword;
 
-        UserLoginTask(String team, String password) {
-            mTeam = team + "@ebecaveiro.pt";
+        UserLoginTask(String email, String password) {
+            mEmail = email;
             mPassword = password;
         }
 
@@ -328,37 +399,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            // Login
-            final Semaphore semaphore = new Semaphore(0);
-            String team = mTeam.replace("@ebecaveiro.pt", "");
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("teams/" + team);
-            teamData = null;
-
-            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    teamData = dataSnapshot.getValue(Team.class);
-                    semaphore.release();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    teamData = null;
-                    semaphore.release();
-                }
-            });
-
-            // Wait for data to be loaded (kill async with a semaphore)
-            try {
-                semaphore.acquire();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (mUser == null) {
                 return false;
             }
 
-            if (teamData == null) {
+            if (!mUser.getPassword().equals(mPassword)) {
                 return false;
+            }
+
+            // Get team data
+            String user_full_name = mUser.getFirst_name() + " " + mUser.getLast_name();
+            for(Team team : teams) {
+                if (team.getParticipants().contains(user_full_name)) {
+                    teamData = team;
+                    break;
+                }
             }
 
             return true;
@@ -370,11 +425,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-
                 // Save data in users phone
                 SharedPreferences.Editor prefs = getApplicationContext().getSharedPreferences("LOGIN_PREFS", 0).edit();
-                String team = mTeam.replace("@ebecaveiro.pt", "");
-                prefs.putString("TEAM", team);
+                String team = ""+teamData.getId();
+                prefs.putString ("TEAM", team);
                 prefs.putString("TEAMNAME", teamData.getName());
                 prefs.commit();
 

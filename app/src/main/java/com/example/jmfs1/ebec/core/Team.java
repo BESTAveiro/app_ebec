@@ -9,7 +9,7 @@ import java.util.List;
 public class Team {
 
     // Attributes
-    private String id;
+    private int id;
     private String password;
     private String name;
     private int credits;
@@ -22,7 +22,7 @@ public class Team {
 
     }
 
-    public Team(String id, String password, String name, int credits, String code, String modality,
+    public Team(int id, String password, String name, int credits, String code, String modality,
                 List<String> participants, List<MiniCompetition> mini_competitions) {
         this.id = id;
         this.password = password;
@@ -34,11 +34,11 @@ public class Team {
         this.mini_competitions = mini_competitions;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

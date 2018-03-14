@@ -151,22 +151,24 @@ public class ScoresFragment extends Fragment {
                 });
                 list.add(parentCpt);
 
-                for (MiniCompetition minicpt : team.getMini_competitions()) {
-                    NLevelItem childCpt = new NLevelItem(minicpt, parentCpt, new NLevelView() {
-                        @Override
-                        public View getView(NLevelItem item) {
-                            View view = inflater_groups.inflate(R.layout.list_item, null);
-                            view.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                            TextView tv = (TextView) view.findViewById(R.id.teamname);
-                            MiniCompetition mcpt = (MiniCompetition) item.getWrappedObject();
-                            String name = "             " + mcpt.getName() + ": " + mcpt.getCredits();
-                            tv.setText(name);
-                            tv.setTextColor(Color.parseColor("#000000"));
-                            return view;
-                        }
-                    });
+                if (team.getMini_competitions() != null) {
+                    for (MiniCompetition minicpt : team.getMini_competitions()) {
+                        NLevelItem childCpt = new NLevelItem(minicpt, parentCpt, new NLevelView() {
+                            @Override
+                            public View getView(NLevelItem item) {
+                                View view = inflater_groups.inflate(R.layout.list_item, null);
+                                view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                                TextView tv = (TextView) view.findViewById(R.id.teamname);
+                                MiniCompetition mcpt = (MiniCompetition) item.getWrappedObject();
+                                String name = "             " + mcpt.getName() + ": " + mcpt.getCredits();
+                                tv.setText(name);
+                                tv.setTextColor(Color.parseColor("#000000"));
+                                return view;
+                            }
+                        });
 
-                    list.add(childCpt);
+                        list.add(childCpt);
+                    }
                 }
 
                 final NLevelAdapter adapter = new NLevelAdapter(list);
