@@ -22,8 +22,8 @@
             />
         <item
             android:id="@+id/nav_fotos"
-            android:icon="@drawable/icon_foto"
-            android:title="Fotos" />
+            android:icon="@drawable/parceiros"
+            android:title="Parceiros" />
 
         <item
             android:id="@+id/nav_alertas"
