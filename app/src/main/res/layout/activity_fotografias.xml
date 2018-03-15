@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
@@ -41,15 +42,33 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
                 />
+            <ImageView
+
+                android:id="@+id/voltalia"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:adjustViewBounds="true"
+                android:autoLink="web"
+
+                android:background="@null"
+                android:clickable="true"
+                android:cursorVisible="true"
+                android:linksClickable="true"
+                android:onClick="govoltalia"
+                android:scaleType="centerInside"
+                android:src="@drawable/voltalia" />
 
         </TableLayout>
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/silverSponsorLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/mainSponsorLayout">
+            android:layout_below="@+id/mainSponsorLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
             <TextView
                 android:id="@+id/silverSponsor"
@@ -60,18 +79,23 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#273e1f"
                 android:textSize="35dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-            <View
-                android:layout_width="250dp"
-                android:layout_height="3dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                 />
 
-        </TableLayout>
+            <ImageView
+                android:layout_below="@id/silverSponsor"
+                android:id="@+id/imageView16"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/promoslogo" />
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        </RelativeLayout>
+
+
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/sponsorLayout"
             android:layout_width="wrap_content"
@@ -87,215 +111,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#273e1f"
                 android:textSize="35dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+            <ImageView
 
-            <View
-                android:layout_width="250dp"
-                android:layout_height="3dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                />
-
-
-            <ImageButton
-
-                android:id="@+id/itgrow"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:adjustViewBounds="true"
-                android:autoLink="web"
-
-                android:background="@null"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:linksClickable="true"
-                android:onClick="gotoitGrow"
-                android:scaleType="centerInside"
-                android:src="@drawable/alticelabs" />
-
-            <ImageButton
-
-                android:id="@+id/shoyce"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="30dp"
-                android:adjustViewBounds="true"
-                android:autoLink="web"
-
-                android:background="@null"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:linksClickable="true"
-                android:onClick="gotoshoyce"
-                android:scaleType="centerInside"
-                />
-
-
-            <ImageButton
-
-                android:id="@+id/tugabox"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="70dp"
-                android:layout_marginRight="70dp"
-                android:layout_marginTop="40dp"
-                android:adjustViewBounds="true"
-                android:autoLink="web"
-
-                android:background="@null"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:linksClickable="true"
-                android:onClick="gototugaBox"
-                android:scaleType="centerInside"
-                android:src="@drawable/tugabox" />
-
-            <ImageButton
-                android:id="@+id/mirtiflor"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="1dp"
-                android:adjustViewBounds="true"
-                android:autoLink="web"
-
-                android:background="@null"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:linksClickable="true"
-                android:onClick="gotomirtiflor"
-                android:scaleType="centerInside"
-                android:src="@drawable/mirtiflor" />
-
-            <ImageButton
-                android:id="@+id/diatosta"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="1dp"
-                android:adjustViewBounds="true"
-                android:autoLink="web"
-
-                android:background="@null"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:linksClickable="true"
-                android:onClick="gotodiatosta"
-                android:scaleType="centerInside"
-                android:src="@drawable/alticelabs" />
-
-        </TableLayout>
-
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/instPartnersLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sponsorLayout">
-
-            <TextView
-                android:id="@+id/instPartner"
+                android:id="@+id/imageView17"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="Institutional Partner"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#273e1f"
-                android:textSize="35dp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="250dp"
-                android:layout_height="3dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                />
-
-            <ImageButton
-
-                android:id="@+id/ua"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:adjustViewBounds="true"
-                android:autoLink="web"
-
-                android:src="@drawable/alticelabs"
-                android:background="@null"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:linksClickable="true"
-                android:onClick="gotoua"
-                android:scaleType="centerInside"/>
-
-            <ImageButton
-
-                android:id="@+id/ipdj"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="45dp"
-                android:scaleX="1.5"
-                android:scaleY="1.5"
-                android:adjustViewBounds="true"
-                android:autoLink="web"
-
-                android:src="@drawable/alticelabs"
-                android:background="@null"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:linksClickable="true"
-                android:onClick="gotoipdj"/>
-
-            <ImageButton
-
-                android:id="@+id/aauav"
-                android:layout_centerHorizontal="true"
-                android:adjustViewBounds="true"
-                android:autoLink="web"
-
-                android:src="@drawable/alticelabs"
-                android:background="@null"
-                android:clickable="true"
-                android:cursorVisible="true"
-                android:linksClickable="true"
-                android:onClick="gotoaauav"
-                android:scaleType="centerInside"/>
+                android:layout_height="300dp"
+                app:srcCompat="@drawable/logos"
+                android:layout_below="@id/sponsor"/>
 
 
-        </TableLayout>
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/mediaPartnerLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/instPartnersLayout"
-            android:layout_marginTop="30dp">
-
-            <TextView
-                android:id="@+id/mediaPartner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Media Partener"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#273e1f"
-                android:textSize="35dp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="250dp"
-                android:layout_height="3dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                 />
-
-        </TableLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 </ScrollView>

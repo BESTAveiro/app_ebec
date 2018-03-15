@@ -44,35 +44,35 @@ public class Fotografias extends Fragment {
         return myView;
     }
 
-    public void gototugaBox(View view) { goToUrl("https://www.tugabox.pt/?lang=en-en");    }
-
-    public void gotoitGrow(View view) { goToUrl("www.itgrow.pt/");    }
-
-    public void gotoshoyce(View view) { goToUrl("shoyce.pt/pt/");    }
-
-    public void gotomirtiflor(View view) { goToUrl("https://pt-pt.facebook.com/Mirtiflor-745004355521875/");    }
-
-    public void gotodiatosta (View view) { goToUrl("http://diatosta.pt/pt/");   }
-
-
-    public void gotoua(View view) {
-        goToUrl("https://www.ua.pt/");
-    }
-
-    public void gotoipdj(View view) {
-        goToUrl("http://www.ipdj.pt/");
-    }
-
-    public void gotoaauav(View view) {
-        goToUrl("http://www.aauav.pt/");
-    }
-
-
-    private void goToUrl(String url) {
-        Uri uriUrl = Uri.parse(url);
-        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-        startActivity(launchBrowser);
-    }
+//    public void gototugaBox(View view) { goToUrl("https://www.tugabox.pt/?lang=en-en");    }
+//
+//    public void gotoitGrow(View view) { goToUrl("www.itgrow.pt/");    }
+//
+//    public void gotoshoyce(View view) { goToUrl("shoyce.pt/pt/");    }
+//
+//    public void gotomirtiflor(View view) { goToUrl("https://pt-pt.facebook.com/Mirtiflor-745004355521875/");    }
+//
+//    public void gotodiatosta (View view) { goToUrl("http://diatosta.pt/pt/");   }
+//
+//
+//    public void gotoua(View view) {
+//        goToUrl("https://www.ua.pt/");
+//    }
+//
+//    public void gotoipdj(View view) {
+//        goToUrl("http://www.ipdj.pt/");
+//    }
+//
+//    public void gotoaauav(View view) {
+//        goToUrl("http://www.aauav.pt/");
+//    }
+//
+//
+//    private void goToUrl(String url) {
+//        Uri uriUrl = Uri.parse(url);
+//        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+//        startActivity(launchBrowser);
+//    }
 
 //    private void setupViewPager(ViewPager viewPager) {
 //        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
