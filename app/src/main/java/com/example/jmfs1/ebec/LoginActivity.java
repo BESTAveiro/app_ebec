@@ -42,6 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Semaphore;
@@ -416,10 +417,39 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             // Get team data
             String user_full_name = mUser.getFirst_name() + " " + mUser.getLast_name();
+            teamData = null;
             for(Team team : teams) {
                 if (team.getParticipants().contains(user_full_name)) {
                     teamData = team;
                     break;
+                }
+            }
+
+            // Check if team was found
+            if (teamData == null) {
+                List<String> core_team_users = Arrays.asList("anavasconcelos", "mariadavid", "dinisbruno", "catarinalopes", "anaoliveira");
+                List<String> topic_group_users = Arrays.asList("rafaelareis", "catarinagomes", "anamoura", "eduardasilva", "jorgemarques");
+                List<String> board_users = Arrays.asList("migueloliveira", "joanacaneco", "franciscabraganca", "anamalta", "ritasardao");
+                List<String> mgmt_users = Arrays.asList("diegohernandez", "bogdankulyk", "jeanbrito", "adrianacosta");
+
+                String username = mUser.getUsername();
+                if (username.equals("joaovalente")) {
+                    teamData = new Team(-1, "mo", 0, null, null, null, null);
+                }
+                else if (core_team_users.contains(username)) {
+                    teamData = new Team(-1, "core-team", 0, null, null, null, null);
+                }
+                else if (topic_group_users.contains(username)) {
+                    teamData = new Team(-1, "topic-group", 0, null, null, null, null);
+                }
+                else if (board_users.contains(username)) {
+                    teamData = new Team(-1, "board", 0, null, null, null, null);
+                }
+                else if (mgmt_users.contains(username)) {
+                    teamData = new Team(-1, "mgmt", 0, null, null, null, null);
+                }
+                else {
+                    teamData = new Team(-1, "organisers", 0, null, null, null, null);
                 }
             }
 
@@ -434,14 +464,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 // Save data in users phone
                 SharedPreferences.Editor prefs = getApplicationContext().getSharedPreferences("LOGIN_PREFS", 0).edit();
-                String team = ""+teamData.getId();
+                String team = ""+teamData.getName();
                 prefs.putString ("TEAM", team);
                 prefs.putString("TEAMNAME", teamData.getName());
                 prefs.commit();
 
-                Log.d("Subscribed", "to "+team);
-                Log.d("Subscribed", "to "+teamData.getName());
+                //Log.d("Subscribed", "to " + team);
+                //Log.d("Subscribed", "to " + teamData.getName());
                 // Subscribe topic
+                Log.d("Subscribed", "to " + team);
                 MessagingUtils.subscribeTopic(team);
 
                 Intent it = new Intent(LoginActivity.this.getApplicationContext(), MainActivity.class);

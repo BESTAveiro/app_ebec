@@ -100,7 +100,7 @@ public class ScoresFragment extends Fragment {
                         TextView tcredits = (TextView) view.findViewById(R.id.teamcredits);
                         Team t = (Team) item.getWrappedObject();
                         String mTeamName = t.getName();
-                        String mTeamCredits = Integer.toString(t.getCredits());
+                        String mTeamCredits = Double.toString(t.getCredits());
                         tname.setText(mTeamName);
                         tcredits.setText(mTeamCredits);
                         return view;

@@ -32,9 +32,21 @@ public class MessagingUtils {
             case "mgmt":
                 FirebaseMessaging.getInstance().subscribeToTopic("core-team");
                 FirebaseMessaging.getInstance().subscribeToTopic("topic-group");
+                FirebaseMessaging.getInstance().subscribeToTopic("organisers");
+                break;
+            case "core-team":
+                FirebaseMessaging.getInstance().subscribeToTopic("core-team");
+                FirebaseMessaging.getInstance().subscribeToTopic("organisers");
+                break;
+            case "topic-group":
+                FirebaseMessaging.getInstance().subscribeToTopic("topic-group");
+                FirebaseMessaging.getInstance().subscribeToTopic("organisers");
+                break;
+            case "organisers":
+                FirebaseMessaging.getInstance().subscribeToTopic("organisers");
                 break;
             default:
-                FirebaseMessaging.getInstance().subscribeToTopic(team);
+                FirebaseMessaging.getInstance().subscribeToTopic("team-" + team);
         }
 
     }

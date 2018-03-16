@@ -10,9 +10,8 @@ public class Team {
 
     // Attributes
     private int id;
-    private String password;
     private String name;
-    private int credits;
+    private double credits;
     private String code;
     private String modality;
     private List<String> participants;
@@ -22,10 +21,9 @@ public class Team {
 
     }
 
-    public Team(int id, String password, String name, int credits, String code, String modality,
+    public Team(int id, String name, double credits, String code, String modality,
                 List<String> participants, List<MiniCompetition> mini_competitions) {
         this.id = id;
-        this.password = password;
         this.name = name;
         this.credits = credits;
         this.code = code;
@@ -40,14 +38,6 @@ public class Team {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public List<String> getParticipants() {
@@ -82,11 +72,11 @@ public class Team {
         this.name = name;
     }
 
-    public int getCredits() {
+    public double getCredits() {
         return credits;
     }
 
-    public void setCredits(int credits) {
+    public void setCredits(double credits) {
         this.credits = credits;
     }
 
