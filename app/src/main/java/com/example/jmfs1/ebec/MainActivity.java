@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
 
             Log.d("Duvidas Prova", "Mandei");
 
-            MessagingUtils.sendMessage(teamName + " tem duvidas na prova!", "topic");
+            MessagingUtils.sendMessage(teamName + " tem duvidas na prova!", "topic-group");
             //MessagingUtils.sendMessageNotNotification(teamName, "td1");
 
         }
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity
 
             Log.d("Duvidas Outros", "Mandei");
 
-            MessagingUtils.sendMessage(teamName + " precisa de algo!", "bdssquad");
+            MessagingUtils.sendMessage(teamName + " precisa de algo!", "core-team");
         }
 
         return super.onOptionsItemSelected(item);

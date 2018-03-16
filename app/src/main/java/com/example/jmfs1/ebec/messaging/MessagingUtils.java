@@ -135,7 +135,7 @@ public class MessagingUtils {
                         "_pt-IOtxlnTUJ");
 
                 Notification raven = new Notification();
-                raven.title("EBEC Aveiro 2017")
+                raven.title("EBEC Challenge Aveiro 2018")
                         .body(message)
                         .to("/topics/"+topic);
 
