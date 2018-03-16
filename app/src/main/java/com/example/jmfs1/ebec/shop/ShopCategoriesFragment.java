@@ -52,15 +52,15 @@ public class ShopCategoriesFragment extends Fragment {
         mTabHost.addTab(mTabHost.newTabSpec("Todos").setIndicator("Todos"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
-        bundle.putString("category", "Cartão");
+        bundle.putString("category", "Card");
         mTabHost.addTab(mTabHost.newTabSpec("Cartão").setIndicator("Cartão"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
-        bundle.putString("category", "Eletrónico");
+        bundle.putString("category", "Electronic");
         mTabHost.addTab(mTabHost.newTabSpec("Eletrónico").setIndicator("Eletrónico"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
-        bundle.putString("category", "Madeiras");
+        bundle.putString("category", "Wood");
         mTabHost.addTab(mTabHost.newTabSpec("Madeiras").setIndicator("Madeiras"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
@@ -68,11 +68,11 @@ public class ShopCategoriesFragment extends Fragment {
         mTabHost.addTab(mTabHost.newTabSpec("Metal").setIndicator("Metal"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
-        bundle.putString("category", "Plástico");
+        bundle.putString("category", "Plastic");
         mTabHost.addTab(mTabHost.newTabSpec("Plástico").setIndicator("Plástico"), ShopFragment.class, bundle);
 
         bundle = new Bundle();
-        bundle.putString("category", "Indiferenciados");
+        bundle.putString("category", "Undifferentiated");
         mTabHost.addTab(mTabHost.newTabSpec("Indiferenciados").setIndicator("Indiferenciados"), ShopFragment.class, bundle);
 
         return rootView;

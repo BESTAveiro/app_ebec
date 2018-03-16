@@ -10,7 +10,7 @@
             />
         <item
             android:id="@+id/nav_loja"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/store"
             android:title="Loja" >
 
         </item>
@@ -27,10 +27,9 @@
 
         <item
             android:id="@+id/nav_alertas"
-            android:icon="@drawable/parceiros"
+            android:icon="@drawable/alarm"
             android:title="Alertas" />
     </group>
-
 
 
 </menu>

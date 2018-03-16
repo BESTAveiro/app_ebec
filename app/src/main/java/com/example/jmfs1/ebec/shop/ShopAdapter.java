@@ -69,12 +69,13 @@ public class ShopAdapter extends ArrayAdapter<Product> {
 
         switch (name) {
             case "Anilhas A":
-            case "Anilhas B":
+                return R.drawable.anilhasa;
             case "Anilhas C":
+                return R.drawable.anilhasc;
             case "Anilhas D":
+                return R.drawable.anilhasd;
             case "Anilhas E":
-            case "Anilhas F":
-                return R.drawable.anilhas;
+                return R.drawable.anilhase;
             case "Balões":
                 return R.drawable.baloes;
             case "Berlindes":
@@ -90,9 +91,11 @@ public class ShopAdapter extends ArrayAdapter<Product> {
             case "Caixa de ovos":
                 return R.drawable.caixasovos;
             case "Camarões A":
+                return R.drawable.camaroesa;
             case "Camarões B":
+                return R.drawable.camaroesb;
             case "Camarões C":
-                return R.drawable.camaroes;
+                return R.drawable.camaroesc;
             case "Cantoneiras de cartão":
                 return R.drawable.cantoneiracartao;
             case "Cilindros de plástico":
@@ -129,13 +132,13 @@ public class ShopAdapter extends ArrayAdapter<Product> {
                 return R.drawable.laser;
             case "LDR":
                 return R.drawable.ldr;
-            case "LEDs amarelos":
+            case "LED amarelo":
                 return R.drawable.ledamarela;
-            case "LEDs brancos":
+            case "LED branco":
                 return R.drawable.ledbranco;
-            case "LEDs verdes":
+            case "LED verde":
                 return R.drawable.ledverde;
-            case "LEDs vermelhos":
+            case "LED vermelho":
                 return R.drawable.ledvermelha;
             case "Lã":
                 return R.drawable.la;
@@ -148,27 +151,37 @@ public class ShopAdapter extends ArrayAdapter<Product> {
             case "Palitos espetada 1":
             case "Palitos espetada 2":
             case "Palitos espetada 3":
-                return R.drawable.palitosespetada;
+                return R.drawable.palitos;
             case "Palitos normais":
                 return R.drawable.palitos;
             case "Papelão":
                 return R.drawable.papelao;
             case "Parafusos A":
+                return R.drawable.parafusosa;
             case "Parafusos B":
+                return R.drawable.parafusosb;
             case "Parafusos C":
+                return R.drawable.parafusosc;
             case "Parafusos D":
+                return R.drawable.parafusosd;
             case "Parafusos E":
+                return R.drawable.parafusose;
             case "Parafusos F":
+                return R.drawable.parafusosf;
             case "Parafusos G":
+                return R.drawable.parafusosg;
             case "Parafusos H":
+                return R.drawable.parafusosh;
             case "Parafusos I":
+                return R.drawable.parafusosi;
             case "Parafusos J":
+                return R.drawable.parafusosj;
             case "Parafusos L":
-            case "Parafusos M":
+                return R.drawable.parafusosl;
             case "Parafusos N":
-            case "Parafusos O":
+                return R.drawable.parafusosn;
             case "Parafusos P":
-                return R.drawable.parafusos;
+                return R.drawable.parafusosp;
             case "Película aderente":
                 return R.drawable.peliculaderente;
             case "Peças de dominó":
@@ -186,15 +199,27 @@ public class ShopAdapter extends ArrayAdapter<Product> {
             case "Porcas":
                 return R.drawable.porcas;
             case "Prego Tipo 1":
+                return R.drawable.pregotipo1;
             case "Prego Tipo 2":
+                return R.drawable.pregotipo2;
             case "Prego Tipo 3":
+                return R.drawable.pregotipo3;
             case "Prego Tipo 4":
+                return R.drawable.pregotipo4;
             case "Prego Tipo 5 (40 mm)":
+                return R.drawable.pregotipo5;
             case "Prego Tipo 6 (60 mm)":
+                return R.drawable.pregotipo6;
             case "Prego Tipo 7":
+                return R.drawable.pregotipo7;
             case "Prego Tipo 8":
-                return R.drawable.prego;
+                return R.drawable.pregotipo8;
+            case "Prego Tipo 9":
+                return R.drawable.pregotipo9;
             case "Resistências":
+            case "Resistência 470 kiloohm":
+            case "Resistência 6.8 ohm":
+            case "Resistência 680 ohm":
                 return R.drawable.resistencias;
             case "Rodas de metal":
                 return R.drawable.rodasmetal;
@@ -207,6 +232,7 @@ public class ShopAdapter extends ArrayAdapter<Product> {
             case "Roofmate grande":
             case "Roofmate médio":
             case "Roofmate pequeno":
+            case "Roofmate":
                 return R.drawable.roofmate;
             case "Seringas Tipo A":
                 return R.drawable.seringastipoa;
@@ -225,13 +251,13 @@ public class ShopAdapter extends ArrayAdapter<Product> {
             case "Transístor NPN":
             case "Transístor PNP":
                 return R.drawable.transistorespnp;
-            case "Tubos cartão 1":
-            case "Tubos cartão 2":
-            case "Tubos cartão 3":
-            case "Tubos cartão 4":
+            case "Tubo cartão 1":
+            case "Tubo cartão 2":
+            case "Tubo cartão 3":
+            case "Tubo cartão 4":
                 return R.drawable.tuboscartao;
-            case "Tubos PVC 1":
-            case "Tubos PVC 2":
+            case "Tubo PVC 1":
+            case "Tubo PVC 2":
                 return R.drawable.tubospvc;
             case "Velas compridas":
                 return R.drawable.velascompridas;
@@ -239,6 +265,16 @@ public class ShopAdapter extends ArrayAdapter<Product> {
                 return R.drawable.velaspequenas;
             case "Ventoinhas":
                 return R.drawable.ventoinha;
+            case "Esticadores":
+                return R.drawable.esticador;
+            case "Lata":
+                return R.drawable.lata;
+            case "Paus de madeira":
+                return R.drawable.paumadeira;
+            case "Rolo de papel":
+                return R.drawable.rolodepapel;
+            case "Tubo de borracha":
+                return R.drawable.tubopreto;
             default:
                 return R.drawable.icon_foto;
 

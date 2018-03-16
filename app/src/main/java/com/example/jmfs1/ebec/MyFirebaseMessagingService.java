@@ -45,7 +45,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Save data
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy   HH:mm:ss");
         Alert alert = new Alert(message, df.format(new Date()));
-        alert.save();
+//        alert.save();
 
         // Notification builder
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
