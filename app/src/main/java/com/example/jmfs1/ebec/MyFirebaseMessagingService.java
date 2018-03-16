@@ -50,7 +50,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Notification builder
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ebec)
-                .setContentTitle("EBEC Aveiro 2017")
+                .setContentTitle("EBEC Challenge Aveiro 2018")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
