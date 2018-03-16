@@ -240,11 +240,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 ValueEventListener eventListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
+//                        users.clear();
+//                        for (DataSnapshot userSnaphot : dataSnapshot.getChildren()) {
+//                            User user = userSnaphot.getValue(User.class);
+//                            user.setUsername(userSnaphot.getKey());
+//                            users.add(user);
+//                        }
                         // Get teams
                         teams.clear();
                         for (DataSnapshot teamSnaphot : dataSnapshot.getChildren()) {
+
                             Team team = teamSnaphot.getValue(Team.class);
+
                             teams.add(team);
                         }
 
