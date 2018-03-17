@@ -2,6 +2,7 @@ package com.example.jmfs1.ebec;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -36,31 +37,39 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getTitle());
         Log.d(TAG, remoteMessage.getData().size() + "");
 
-        // Notification sound
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        // Get data
-        String message = remoteMessage.getNotification().getBody();
 
-        // Save data
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy   HH:mm:ss");
-        Alert alert = new Alert(message, df.format(new Date()));
+        SharedPreferences sp = getSharedPreferences("LOGIN_PREFS", MODE_PRIVATE);
+        String teamName = sp.getString("TEAM", "Some Error Ocurred");
+        //msg dum participante e sou organizer
+        //if((remoteMessage.getFrom()=="/topics/topic-group" && teamName=="topic-group") || (remoteMessage.getFrom()=="/topics/core-team" && teamName=="core-team") || (remoteMessage.getFrom()!="/topics/core-team" && remoteMessage.getFrom()!="/topics/topic-group")){
+        if((remoteMessage.getFrom().equals("/topics/core-team") && teamName.equals("core-team")) || (remoteMessage.getFrom().equals("/topics/topic-group") && teamName.equals("topic-group"))){
+
+            // Notification sound
+            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            // Get data
+            String message = remoteMessage.getNotification().getBody();
+
+            // Save data
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy   HH:mm:ss");
+            Alert alert = new Alert(message, df.format(new Date()));
 //        alert.save();
+            // Notification builder
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.ebec)
+                    .setContentTitle("EBEC Challenge Aveiro 2018")
+                    .setContentText(message)
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setDefaults(NotificationCompat.DEFAULT_VIBRATE);
 
-        // Notification builder
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ebec)
-                .setContentTitle("EBEC Challenge Aveiro 2018")
-                .setContentText(message)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setDefaults(NotificationCompat.DEFAULT_VIBRATE);
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(new Random().nextInt(Integer.MAX_VALUE) /* ID of notification */, notificationBuilder.build());
+            notificationManager.notify(new Random().nextInt(Integer.MAX_VALUE) /* ID of notification */, notificationBuilder.build());
+        }
     }
 
 }
