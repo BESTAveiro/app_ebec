@@ -43,7 +43,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String teamName = sp.getString("TEAM", "Some Error Ocurred");
         //msg dum participante e sou organizer
         //if((remoteMessage.getFrom()=="/topics/topic-group" && teamName=="topic-group") || (remoteMessage.getFrom()=="/topics/core-team" && teamName=="core-team") || (remoteMessage.getFrom()!="/topics/core-team" && remoteMessage.getFrom()!="/topics/topic-group")){
-        if((remoteMessage.getFrom().equals("/topics/core-team") && teamName.equals("core-team")) || (remoteMessage.getFrom().equals("/topics/topic-group") && teamName.equals("topic-group"))){
+        if((remoteMessage.getFrom().equals("/topics/core-team") && teamName.equals("core-team")) || (remoteMessage.getFrom().equals("/topics/topic-group") && teamName.equals("topic-group")) || (!remoteMessage.getFrom().equals("/topics/core-team") && !remoteMessage.getFrom().equals("/topics/core-team"))){
 
             // Notification sound
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
