@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Main Sponsor"
+                android:text="Gold Sponsor"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#273e1f"
                 android:textSize="35dp"
